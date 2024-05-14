@@ -14,11 +14,19 @@
     <button onclick="showScore()">Show Score</button>
     <script>
 
-        let score = JSON.parse(localStorage.getItem('score')) || {
-                wins: 0,
-                lose: 0,
-                tie: 0
-            };
+        const scoreString = JSON.stringify({
+            wins: 0,
+            lose: 0,
+            tie: 0
+        });
+
+        const score = JSON.parse(localStorage.getItem('scoreBoard')) || {
+            wins: 0,
+            lose: 0,
+            tie: 0
+        };
+
+
 
         function playGame(userMove){
             const computerMove = pickComputerMove();
@@ -58,7 +66,7 @@
                 score.tie++;
             }
 
-            localStorage.setItem('score', JSON.stringify(score));
+            localStorage.setItem('scoreBoard', scoreString);
 
             alert(`You picked ${userMove}. Computer picked ${computerMove}. ${result}
             Wins: ${score.wins}, Losses: ${score.lose}, Ties: ${score.tie}`);
@@ -83,7 +91,7 @@
             score.wins = 0;
             score.lose = 0;
             score.tie = 0;
-            localStorage.removeItem('score');
+            localStorage.removeItem('scoreBoard');
         }
 
         function showScore(){
