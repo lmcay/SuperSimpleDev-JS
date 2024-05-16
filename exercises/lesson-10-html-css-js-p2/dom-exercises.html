@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .amazon {
+            background-color: rgb(255, 216, 20);
+            padding: 10px 25px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+
+        .uber {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-right: 15px;
+            
+        }
+
+        .uber-a {
+            background-color: black;
+            color: white;
+        }
+
+        .uber-b {
+            background-color: rgb(230,230,230);
+            color: black;
+        }
+
+        .simple-button-off {
+            background-color: rgb(230,230,230);
+            border: none;
+            padding: 10px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .simple-button-on {
+            background-color: black;
+            color: white;
+        }
+
+
+    </style>
+</head>
+<body>
+    <button class="amazon">Add to Cart</button><br><br><hr>
+    <button class="uber uber-a">Request now</button>
+    <button class="uber uber-b">Schedule for later</button><br><hr>
+    <button class="js-button">Test</button><br><hr>
+    <button class="simple-button-off gaming" onclick="toggle('gaming')">Gaming</button>
+
+    <button class="simple-button-off music" onclick="toggle('music')">Music</button>
+    
+    <button class="simple-button-off tech" onclick="toggle('tech')">Tech</button>
+    <script>
+        console.log(document.querySelector('.js-button').classList.contains('js-button'));
+
+        function toggle(classname){
+
+            let btn = document.querySelector(`.${classname}`);
+            if(!btn.classList.contains('simple-button-on')){
+                turnOff();
+                btn.classList.add('simple-button-on');
+            } else {
+                btn.classList.remove('simple-button-on');
+            }
+        }
+
+        function turnOff(){
+            let btn = document.querySelector('.simple-button-on');
+            if(btn){
+                btn.classList.remove('simple-button-on');
+            }
+        }
+
+    </script>
+</body>
+</html>

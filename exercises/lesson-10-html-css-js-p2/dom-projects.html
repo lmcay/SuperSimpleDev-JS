@@ -28,6 +28,15 @@
             padding: 12px 15px; 
             border: none;
         }
+
+        .is-subscribed {
+            background-color: rgb(240, 240, 240);
+            color: black;
+        }
+
+        .error {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -40,7 +49,7 @@
     <input type="text" placeholder="Cost of order" class="cost" onkeydown="enter(event.key)">
     <button onclick="calculate()" class="calculate">Calculate</button>
     <p class="totalCost"></p><br><br>
-
+    <p class="error"></p>
     
     <p>Rock Paper Scissors</p>
     <a href="dom-rps.html">Click Here</a><br><br>
@@ -49,19 +58,29 @@
 
         String(23);
 
-        window.document
-        window.console.log
-        window.alert
-
         function subscribe() {
             let sub = document.querySelector('.subscribe');
-            sub.innerText = sub.innerText === 'Subscribe now' ? 'Subscribed' : 'Subscribe';
+            if(sub.innerText === 'Subscribe'){
+                sub.innerHTML = 'Subscribed'
+                sub.classList.add('is-subscribed');
+            } else {
+                sub.innerHTML = 'Subscribe'
+                sub.classList.remove('is-subscribed');
+            }
         }
 
         function calculate(){
             let price = parseFloat(document.querySelector('.cost').value);
-            const total = price < 40 ? price+= 10 : price;
-            document.querySelector('.totalCost').innerText = `$${total}`;
+            
+            if(price <= 0) {
+                document.querySelector('.error').innerText = 'Error: cost cannot be less than $0';
+                document.querySelector('.totalCost').innerText = '';
+            } else {
+                const total = price < 40 ? price+= 10 : price;
+                document.querySelector('.totalCost').innerText = `$${total}`;
+                document.querySelector('.error').innerText = '';
+            }
+            
         }
 
         function enter(key){
