@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button class="a9">9a</button>
+    <button class="b9" onclick='b9()'>9b</button>
+    <button class="heads" onclick="chose('heads')">heads</button>
+    <button class="tails" onclick="chose('tails')">tails</button>
+    <p class="chose">You chose: </p>
+    <br>
+    <input type="text" class="yourName" placeholder="name" onkeydown="onKeyName(event.key)">
+    <button class="submitName" onclick="displayName()">Submit</button>
+    <p class="displayName"></p><br><br>
+
+    <p>Amazon Shipping Calculator</p>
+    <p>Orders under $40 = +$10 shipping.</p>
+    <p>Orders over $40 = FREE shipping.</p>
+    <input type="text" placeholder="Cost of order" class="cost" onkeydown="enter(event.key)">
+    <button onclick="calculate()">Calculate</button>
+    <p class="totalCost"></p>
+    <br><br>
+    <input class="textInput"></input>
+    <p class="live"></p>
+    
+    <script>
+        
+        function liveText(){
+            const inputElement = document.querySelector('.textInput');
+            const messageElement = document.querySelector('.live');
+
+            inputElement.onkeyup = function() {
+                messageElement.innerHTML = inputElement.value;
+            };
+        }
+
+        liveText();
+        console.log(document.querySelector('.a9'));
+
+        function chose(userChoice){
+            document.querySelector('.chose').innerText = `You chose: ${userChoice}`;
+        }
+
+        function b9(){
+            let msg = document.querySelector('.b9');
+            msg.innerText = msg.innerText === '9b' ? '9b done!' : '9b';
+        }
+
+        function displayName(){
+            let name = document.querySelector('.yourName').value;
+            document.querySelector('.displayName').innerText = `Your name is ${name}`;
+        }
+
+        function onKeyName(key){
+            if(key === 'Enter'){
+                displayName();
+            }
+        }
+
+        function calculate(){
+            let price = parseFloat(document.querySelector('.cost').value);
+            let total = price < 40 ? price+= 10 : price;
+            
+
+            document.querySelector('.totalCost').innerText = `$${Math.round(total*100)/100}`;
+        }
+
+        function enter(key){
+            if(key === 'Enter'){
+                calculate();
+            }
+        }
+    </script>
+</body>
+</html>
