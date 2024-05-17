@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Todo List Practice 1</h2>
+    <input type="text" placeholder="Todo name" class="toDoInput">
+    <input type="date">
+    <button onclick="addTask()">Add</button>
+    
+    <p class="taskHTML"></p>
+    <script>
+        let tasks = [];
+        
+
+        function addTask(){
+            let taskHTML = '';
+            const task = document.querySelector('.toDoInput');
+            tasks.push(task.value);
+            displayToDoList();
+            task.value = '';
+        }
+
+        function displayToDoList(){
+
+            let taskHTML = '';
+            for(let i = 0; i < tasks.length; i++){
+                taskHTML += `<p>${tasks[i]} <button onclick='deleteTask(${i})'>Delete</button></p>`;
+            }
+
+            console.log(tasks);
+            document.querySelector('.taskHTML').innerHTML = taskHTML;
+
+            
+        }
+
+        function deleteTask(index){
+            tasks.splice(index, 1);
+            console.log(tasks);
+            displayToDoList();
+        }
+
+
+
+
+
+    </script>
+</body>
+</html>
