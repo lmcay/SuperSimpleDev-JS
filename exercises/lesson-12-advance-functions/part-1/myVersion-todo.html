@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .toDoInput, .dueDate {
+            padding: 10px;
+            
+        }
+
+        .add, .remove {
+            background-color: green;
+            color: white;
+            padding: 15px 0;
+            border: none;
+        }
+
+        .remove {
+            background-color: darkred;
+        }
+
+
+
+        .grid {
+            display: grid;
+            grid-template-columns: 250px 150px 100px;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .taskHTML {
+            display: grid;
+            grid-template-columns: 250px 150px 100px;
+            gap: 10px;
+            
+        }
+    </style>
+</head>
+<body>
+    <h2>Todo List </h2>
+
+    <div class="grid">
+        <input type="text" placeholder="Todo name" class="toDoInput">
+        <input type="date" class="dueDate">
+        <button onclick="addTask()" class="add">Add</button>
+    </div>
+    
+
+    <div class="taskHTML">
+
+    </div>
+    <script>
+
+        let taskArray = JSON.parse(localStorage.getItem('taskStorage')) || [];
+
+
+        displayToDoList();
+        
+
+        function addTask(){
+            let taskHTML = '';
+            const addTask = document.querySelector('.toDoInput');
+            const dueDate = document.querySelector('.dueDate');
+            const name = addTask.value;
+            const date = dueDate.value; 
+
+            addTask.value = '';
+            dueDate.value = '';
+            console.log(typeof taskArray);
+            taskArray.push({name, date});
+            localStorage.setItem('taskStorage', JSON.stringify(taskArray));
+
+
+            displayToDoList();
+        }
+
+        function displayToDoList(){
+
+            let taskHTML = '';
+
+            taskArray.forEach(function(taskObject, i){
+                taskHTML += `
+                
+                <p>${taskObject.name}</p>
+                <p>${taskObject.date}</p>
+                <button class="remove" onclick='deleteTask(${i})'>Delete</button>
+
+                `;
+            })
+
+            // for(let i = 0; i < taskArray.length; i++){
+            //     taskHTML += `
+                
+            //     <p>${taskArray[i].name}</p>
+            //     <p>${taskArray[i].date}</p>
+            //     <button class="remove" onclick='deleteTask(${i})'>Delete</button>
+
+            //     `;
+            // }
+            
+            document.querySelector('.taskHTML').innerHTML = taskHTML;
+
+            
+        }
+
+        function deleteTask(index){
+            taskArray.splice(index, 1);
+            localStorage.setItem('taskStorage', JSON.stringify(taskArray));
+            displayToDoList();
+        }
+
+
+
+
+
+    </script>
+</body>
+</html>
