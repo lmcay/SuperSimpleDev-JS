@@ -26,23 +26,6 @@
 
     <p class="cart">Cart Quantity: 0</p>
 
-    <script>
-        let qty = 0;
-
-        function updateCartQuantity(number, operation){
-            if(operation === '+'){
-                (qty+number) > 10 ? console.log(`The cart max capacity is 10. Cart quantity: ${qty}`) : qty+=number;
-            } else if (operation === '-'){
-                (qty-number) <= 0 ? console.log(`The cart minimum capacity is 0. Cart quantity: ${qty}`) : qty-=number;  
-            }
-
-            showCart();
-        }
-
-        function showCart(){
-            document.querySelector('.cart').innerHTML = `Cart Quantity: ${qty}`;
-        }
-        
-    </script>
+    <script src="scripts/cart.js"></script>
 </body>
 </html>
